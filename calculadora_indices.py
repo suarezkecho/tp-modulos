@@ -1,20 +1,3 @@
-hombre={
-    "peso":81,
-    "altura_m":1.75,
-    "altura_cm":175,
-    "edad":20,
-    "valor_genero_GC": 10.8,
-    "valor_genero_TMB": 5,
-    "valor_actividad": 1.55}
-mujer={
-    "peso":58,
-    "altura_m":1.69,
-    "altura_cm":169,
-    "edad":21,
-    "valor_genero_GC": 0,
-    "valor_genero_TMB": -161,
-    "valor_actividad": 1.725}
-
 def calcular_IMC(peso: float, altura_m: float) -> float:
     """
     Calcula el IMC en base a:
@@ -66,9 +49,6 @@ def calcular_IMC(peso: float, altura_m: float) -> float:
     except TypeError as tp:
         return f"Error de tipado {tp}"
     
-imc_hombre = calcular_IMC(hombre["peso"], hombre["altura_m"])
-imc_mujer = calcular_IMC(mujer["peso"], mujer["altura_m"])
-
 
 def calcular_porcentaje_grasa(peso:float, altura_m:float, edad:int, valor_genero:float, IMC:float=None) -> float:
     """
@@ -119,10 +99,6 @@ def calcular_porcentaje_grasa(peso:float, altura_m:float, edad:int, valor_genero
     except ValueError as va:
         return va
 
-cg_hombre = calcular_porcentaje_grasa(imc_hombre[0],hombre["peso"],hombre["altura_m"], hombre["edad"], hombre["valor_genero_GC"]) # Hombre
-cg_mujer = calcular_porcentaje_grasa(imc_mujer[0], mujer["peso"], mujer["altura_m"], mujer["edad"], mujer["valor_genero_GC"]) # Mujer
-# print(f"{cg_hombre}%")
-# print(f"{cg_mujer}%")
 
 def calcular_calorias_en_reposo(peso:float, altura_cm:float, edad:int, valor_genero:int)-> float:
     """
@@ -145,10 +121,6 @@ def calcular_calorias_en_reposo(peso:float, altura_cm:float, edad:int, valor_gen
     except TypeError as tp:
         return tp
 
-TMB_hombre = calcular_calorias_en_reposo(hombre["peso"],hombre["altura_cm"],hombre["edad"],hombre["valor_genero_TMB"])
-TMB_mujer = calcular_calorias_en_reposo(mujer["peso"], mujer["altura_cm"], mujer["edad"], mujer["valor_genero_TMB"])
-# print(f"{TMB_hombre} cal")
-# print(f"{TMB_mujer} cal")
 
 def calcular_calorias_en_actividad(peso:float, altura_cm:float, edad:int, valor_genero:float, valor_actividad:float, TMB:float=None) -> float:
     """
@@ -175,12 +147,8 @@ def calcular_calorias_en_actividad(peso:float, altura_cm:float, edad:int, valor_
     TMB_actividad_fisica = TMB * valor_actividad
     return round(TMB_actividad_fisica,2)
 
-tmb_actividad_fisica_hombre = calcular_calorias_en_actividad(TMB_hombre, hombre["peso"], hombre["altura_cm"], hombre["edad"], hombre["valor_genero_TMB"], hombre["valor_actividad"])
-tmb_actividad_fisica_mujer = calcular_calorias_en_actividad(TMB_mujer, mujer["peso"], mujer["altura_cm"], mujer["edad"], mujer["valor_genero_TMB"], mujer["valor_actividad"])
-# print(f"{tmb_actividad_fisica_hombre} cal")
-# print(f"{tmb_actividad_fisica_mujer} cal")
 
-def consumo_calorias_recomendado_para_adelgazar(peso: float, altura_cm: float, edad: int, valor_genero: int, TMB: float = None) -> str:
+def consumo_calorias_recomendado_para_adelgazar(peso: float, altura_cm: float, edad: int, valor_genero: int, TMB:float=None) -> str:
     """
     Calcula el rango de calorías recomendado, que debe consumir una persona diariamente en caso de que desee adelgazar.\n
         - calorias_recomendadas: TMB - 15% o 20%
@@ -201,9 +169,3 @@ def consumo_calorias_recomendado_para_adelgazar(peso: float, altura_cm: float, e
     calorias_maximas_recomendadas_para_adelgazar = round(TMB - valor_maximo_para_adelgazar,2)
 
     return f"Para adelgazar es recomendado que consumas entre: {calorias_maximas_recomendadas_para_adelgazar} y {calorias_minimas_recomendadas_para_adelgazar} calorías al día." 
-
-recom_para_adelgazar_hombres = consumo_calorias_recomendado_para_adelgazar(TMB_hombre,hombre["peso"], hombre["altura_cm"], hombre["edad"],hombre["valor_genero_TMB"])
-recom_para_adelgazar_mujeres = consumo_calorias_recomendado_para_adelgazar(TMB_mujer,mujer["peso"], mujer["altura_cm"], mujer["edad"],mujer["valor_genero_TMB"])
-
-# print(recom_para_adelgazar_hombres)
-# print(recom_para_adelgazar_mujeres)
