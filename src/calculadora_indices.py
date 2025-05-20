@@ -95,9 +95,10 @@ def calcular_porcentaje_grasa(peso:float, altura_m:float, edad:int, valor_genero
                 return GC, f"El indice de grasa {GC} es lo recomendado para mujeres entre 50 y 59 años."
             else:
                 return f"Tu indice de grasa corporal ({GC}) esta fuera del rango recomendado para tu edad"
-        # return round(float(GC),2)
     except ValueError as va:
         return va
+    except TypeError as tp:
+        return tp
 
 
 def calcular_calorias_en_reposo(peso:float, altura_cm:float, edad:int, valor_genero:int)-> float:
@@ -141,11 +142,16 @@ def calcular_calorias_en_actividad(peso:float, altura_cm:float, edad:int, valor_
 
     Retorno (float): La cantidad de calorías que una persona quema, al realizar algún tipo de actividad física semanalmente. 
     """
-    if TMB is None:
-        TMB = calcular_calorias_en_reposo(peso,altura_cm,edad,valor_genero)
+    try:
+        if TMB is None:
+            TMB = calcular_calorias_en_reposo(peso,altura_cm,edad,valor_genero)
 
-    TMB_actividad_fisica = TMB * valor_actividad
-    return round(TMB_actividad_fisica,2)
+        TMB_actividad_fisica = TMB * valor_actividad
+        return round(TMB_actividad_fisica,2)
+    except ValueError as va:
+        return va
+    except TypeError as tp:
+        return tp
 
 
 def consumo_calorias_recomendado_para_adelgazar(peso: float, altura_cm: float, edad: int, valor_genero: int, TMB:float=None) -> str:
@@ -159,13 +165,19 @@ def consumo_calorias_recomendado_para_adelgazar(peso: float, altura_cm: float, e
     *parm edad (int): Edad de la persona en años.\n
     *parm valor_genero (int): Valor que varía según el género de la persona: en caso de ser masculino debe ser 5 y en caso de ser femenino debe ser -161.\n
     """
-    if TMB is None:
-        TMB = calcular_calorias_en_reposo(peso, altura_cm, edad, valor_genero)
+    try:
+        if TMB is None:
+            TMB = calcular_calorias_en_reposo(peso, altura_cm, edad, valor_genero)
+            
+        valor_minimo_para_adelgazar = (TMB*15)/100
+        valor_maximo_para_adelgazar = (TMB*20)/100
         
-    valor_minimo_para_adelgazar = (TMB*15)/100
-    valor_maximo_para_adelgazar = (TMB*20)/100
-    
-    calorias_minimas_recomendadas_para_adelgazar = round(TMB - valor_minimo_para_adelgazar,2)
-    calorias_maximas_recomendadas_para_adelgazar = round(TMB - valor_maximo_para_adelgazar,2)
+        calorias_minimas_recomendadas_para_adelgazar = round(TMB - valor_minimo_para_adelgazar,2)
+        calorias_maximas_recomendadas_para_adelgazar = round(TMB - valor_maximo_para_adelgazar,2)
 
-    return f"Para adelgazar es recomendado que consumas entre: {calorias_maximas_recomendadas_para_adelgazar} y {calorias_minimas_recomendadas_para_adelgazar} calorías al día." 
+        return f"Para adelgazar es recomendado que consumas entre: {calorias_maximas_recomendadas_para_adelgazar} y {calorias_minimas_recomendadas_para_adelgazar} calorías al día." 
+    
+    except ValueError as va:
+        return va
+    except TypeError as tp:
+        return tp
