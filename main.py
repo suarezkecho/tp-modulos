@@ -1,5 +1,5 @@
 from creacion_de_persona import crear_persona
-from calculadora_indices import calcular_IMC, calcular_porcentaje_grasa, calcular_calorias_en_reposo, calcular_calorias_en_actividad, consumo_calorias_recomendado_para_adelgazar
+from src.calculadora_indices import calcular_IMC, calcular_porcentaje_grasa, calcular_calorias_en_reposo, calcular_calorias_en_actividad, consumo_calorias_recomendado_para_adelgazar
 
 if __name__ == "__main__":
     peso = float(input("Ingrese su peso en kg: "))

@@ -1,4 +1,4 @@
-from calculadora_indices import calcular_porcentaje_grasa
+from src.calculadora_indices import calcular_porcentaje_grasa
 from creacion_de_persona import crear_persona
 
 if __name__ == '__main__':

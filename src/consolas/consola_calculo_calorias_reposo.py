@@ -1,4 +1,4 @@
-from calculadora_indices import calcular_calorias_en_reposo
+from src.calculadora_indices import calcular_calorias_en_reposo
 from creacion_de_persona import crear_persona
 
 if __name__ == '__main__':

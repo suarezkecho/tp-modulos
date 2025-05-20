@@ -1,4 +1,4 @@
-from calculadora_indices import calcular_calorias_en_actividad
+from src.calculadora_indices import calcular_calorias_en_actividad
 from creacion_de_persona import crear_persona
 
 if __name__ == '__main__':
