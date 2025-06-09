@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
 from src.elementos_de_programa import crear_persona, obtener_inputs
 from src.calculadora_indices import calcular_calorias_en_actividad
 
